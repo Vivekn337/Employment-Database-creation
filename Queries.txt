@@ -1,0 +1,62 @@
+use mydb;
+
+Select D.Dept_Name, E.BusinessTravel, count(E.BusinessTravel) from Department D
+join Employee E on E.Dept_ID = D.Dept_ID
+group by D.Dept_Name, E.BusinessTravel;
+
+use mydb;
+
+Select D.Dept_Name, sum(E.DistanceFromHome) AS Total_DistanceFromHome
+from Department D 
+join Employee E on D.Dept_ID = E.Dept_ID
+group by D.Dept_ID
+order by Total_DistanceFromHome DESC;
+
+use mydb;
+
+select D.Dept_Name, EF.EducationField, count(E.EmployeeNumber) as EmployeeCount,
+avg(EP.PerformanceRating) as AvgPerformanceRating
+from Department D join Employee E on D.Dept_ID = E.Dept_ID 
+join education_field EF on EF.EduField_ID = E.EducationField
+join emp_performance EP on EP.EmployeeNumber = E.EmployeeNumber
+where EF.EducationField = 'Life Sciences' and D.Dept_Name = 'Sales';
+
+use mydb;
+
+Select D.Dept_Name, avg(EF.Environment_Satisfaction) as Avg_Environment_Satisfaction, avg(EF.Job_Satisfaction) as Avg_Job_Satisfaction
+from Department D join Employee E on D.Dept_ID = E.Dept_ID
+join employee_feedback EF on E.EmployeeNumber = EF.EmployeeNumber group by D.Dept_Name;
+
+use mydb;
+
+Select D.Dept_Name, round(avg(ES.MonthlyIncome),2) As Emp_Average_Salary from Department D 
+join Employee E on E.Dept_ID = D.Dept_ID
+join education_field EF on E.EducationField = EF.EduField_ID
+join emp_salary ES on ES.EmployeeNumber = E.EmployeeNumber
+where EF.EducationField = 'Medical'
+group by D.Dept_Name;
+
+use mydb;
+
+Select E.MaritalStatus, round(avg(E.YearsAtCompany),2) as Avg_Company_Experience
+from Department D
+join Employee E on D.Dept_ID = E.Dept_ID 
+group by E.MaritalStatus;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
